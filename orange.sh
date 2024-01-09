@@ -34,7 +34,7 @@ then
  fi   
 fi
 # Добавлен код для проверки "Initialization Sequence Completed"
- if grep -q 'Initialization Sequence Completed' "$0"
+ if grep -q "Initialization Sequence Completed" "$0"
  then
  echo "tun is work! Exiting the script."
  exit 0
