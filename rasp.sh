@@ -1,5 +1,5 @@
 #!/bin/sh
-dhcl=$(grep -x "/sbin/ifconfig eth0 0.0.0.0 0.0.0.0 | dhclient" /etc/rc.local)
+#dhcl=$(grep -x "/sbin/ifconfig eth0 0.0.0.0 0.0.0.0 | dhclient" /etc/rc.local)
 #dhcl=$(grep "/sbin/ifconfig eth0 0.0.0.0 0.0.0.0 | dhclient" /etc/rc.local)
 #dhcl_com="# /sbin/ifconfig eth0 0.0.0.0 0.0.0.0 | dhclient &"
 stat_old=$(systemctl status isc-dhcp-server.service | awk '/Active/{print $2}')
