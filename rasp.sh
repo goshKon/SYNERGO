@@ -16,7 +16,7 @@ if [ "$stat_old" = "active" ]
             echo "Rebooting VPN AFTER NO PING"
             killall -15 openvpn
             sleep 5
-          nohup /usr/sbin/openvpn --config /etc/openvpn/client.ovpn & >/dev/null 2>&1 &
+          /usr/sbin/openvpn --config /etc/openvpn/client.ovpn & >/dev/null 2>&1
 
 		fi   
 fi
@@ -26,11 +26,11 @@ then
     elif 
 	[ "$dhcl" != "$dhcl_com" ] 
 	then
- /sbin/ifconfig eth0 0.0.0.0 0.0.0.0 | dhclient & >/dev/null 2>&1 &
+ /sbin/ifconfig eth0 0.0.0.0 0.0.0.0 | dhclient & >/dev/null 2>&1
         sleep 10
         killall -15 openvpn
         sleep 5
-       nohup /usr/sbin/openvpn --config /etc/openvpn/client.ovpn & >/dev/null 2>&1 &
+       /usr/sbin/openvpn --config /etc/openvpn/client.ovpn & >/dev/null 2>&1
         echo "Restarting VPN DHCP"
 else
         s3=$(systemctl start isc-dhcp-server.service)
@@ -43,7 +43,7 @@ else
         sleep 5
         killall -15 openvpn
         sleep 5
-       nohup /usr/sbin/openvpn --config /etc/openvpn/client.ovpn & >/dev/null 2>&1 &
+       /usr/sbin/openvpn --config /etc/openvpn/client.ovpn & >/dev/null 2>&1
         echo "Restarting VPN fnsh"
 fi    
     
