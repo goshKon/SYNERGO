@@ -7,11 +7,11 @@ echo "Current status of dnsmasq.service: $stat_new"
 
 if [ "$dhcl" != "$dhcl_com" ] 
 	then
- 			/sbin/ifconfig eth0 0.0.0.0 0.0.0.0 | dhclient & >/dev/null 2>&1 &
+ 			/sbin/ifconfig eth0 0.0.0.0 0.0.0.0 | dhclient & >/dev/null 2>&1
 			sleep 10
 			killall -15 openvpn
 			sleep 5
-			nohup /usr/sbin/openvpn --config /etc/openvpn/client.ovpn & >/dev/null 2>&1 &
+			/usr/sbin/openvpn --config /etc/openvpn/client.ovpn & >/dev/null 2>&1 &
 			echo "Restarting DHCP"	
    
    if /sbin/ifconfig tun0 | grep -q "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00"
@@ -29,7 +29,7 @@ then
         sleep 5
         killall -15 openvpn
         sleep 5
-        nohup /usr/sbin/openvpn --config /etc/openvpn/client.ovpn & >/dev/null 2>&1 &
+        /usr/sbin/openvpn --config /etc/openvpn/client.ovpn & >/dev/null 2>&1
         echo "Restarting VPN"		
  fi   
 fi
