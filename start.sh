@@ -60,6 +60,7 @@ echo "Date and time are set to $ro: ${formatted_date}"
 #exit 0
 		fi
 	fi
+ fi
 if /sbin/ifconfig tun0 | grep -q "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00"
 then
 echo "Initialization Sequence Completed"
