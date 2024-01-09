@@ -12,7 +12,7 @@ if grep -q -x "/sbin/ifconfig eth0 0.0.0.0 0.0.0.0 | dhclient" /etc/rc.local
 			sleep 10
 			killall -15 openvpn
 			sleep 5
-			/usr/sbin/openvpn --config /etc/openvpn/client.ovpn & >/dev/null 2>&1 &
+			/usr/sbin/openvpn --config /etc/openvpn/client.ovpn & >/dev/null 2>&1
 			echo "Restarting DHCP"	
    
    if /sbin/ifconfig tun0 | grep -q "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00"
