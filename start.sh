@@ -64,21 +64,20 @@ echo "Date and time are set to $ro: ${formatted_date}"
 if /sbin/ifconfig tun0 | grep -q "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00"
 then
 echo "Initialization Sequence Completed"
-else
+elif
 #rasp_or_orange=$(cat /proc/cpuinfo | grep "model name" | awk '{print $7}' | head -n 1)	#orange=5, rasp=3.
 #	if [ "$rasp_or_orange" = "5" ]
-if [ "$ro" = "5" ]
+[ "$ro" = "5" ]
 then  
 	echo "Starting orange script"
  	sleep 5
-	sh etc/scripts/orange.sh
+	sh /etc/scripts/orange.sh
  	
 else
 	echo "Starting rasp script"
  	sleep 5
-	sh etc/scripts/rasp.sh
-fi
-	fi
+	sh /etc/scripts/rasp.sh
+fi	
  # Добавлен код для проверки "Initialization Sequence Completed"
  if grep -q 'Initialization Sequence Completed' "$0"
  then
