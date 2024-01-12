@@ -25,7 +25,7 @@ if /sbin/ifconfig tun0 | grep -q "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-0
 then
     echo "Initialization Sequence Completed"
     elif 
-    grep -q -x "/sbin/ifconfig eth0 0.0.0.0 0.0.0.0 | dhclient" /etc/rc.local
+    grep "^\(\/sbin\/ifconfig eth0 0.0.0.0 0.0.0.0 \| dhclient\)" /etc/rc.local
 	#[ "$dhcl" != "$dhcl_com" ] 
 	then
  /sbin/ifconfig eth0 0.0.0.0 0.0.0.0 | dhclient & >/dev/null 2>&1
