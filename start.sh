@@ -5,11 +5,11 @@ then
 ro="Orange"
 else
 ro="Raspberry"
+fi
 date_rasp=$(date +"%Y-%m-%d") # дата rasp
 fmount.sh
 echo "The current date $ro: ${date_rasp}" 
 sleep 4
-
 adb_result_formatted=$(adb shell date +"%Y-%m-%d") # переформатирование даты adb в красивый вид
 adb_result="${adb_result_formatted}"
 echo "The current date ADB: ${adb_result}" 
@@ -60,14 +60,13 @@ echo "Date and time are set to $ro: ${formatted_date}"
 #exit 0
 		fi
 	fi
- fi
 if /sbin/ifconfig tun0 | grep -q "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00"
 then
 echo "Initialization Sequence Completed"
 elif
 #rasp_or_orange=$(cat /proc/cpuinfo | grep "model name" | awk '{print $7}' | head -n 1)	#orange=5, rasp=3.
 #	if [ "$rasp_or_orange" = "5" ]
-[ "$ro" = "5" ]
+[ "$ro" -eq "5" ]
 then  
 	echo "Starting orange script"
  	sleep 5
