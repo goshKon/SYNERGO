@@ -67,7 +67,7 @@ elif
 #rasp_or_orange=$(cat /proc/cpuinfo | grep "model name" | awk '{print $7}' | head -n 1)	#orange=5, rasp=3.
 #	if [ "$rasp_or_orange" = "5" ]
 #[ "$ro" -eq "5" ]
-[ "$ro" == "Orange" ]
+[ "$ro" = "Orange" ]
 then  
 	echo "Starting orange script"
  	sleep 5
