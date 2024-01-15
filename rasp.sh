@@ -1,4 +1,10 @@
 #!/bin/sh
+# Зеленый цвет
+GREEN='\033[0;32m'
+# Красный цвет
+RED='\033[0;31m'
+# Сброс цвета
+NC='\033[0m'
 stat_old=$(systemctl status isc-dhcp-server.service | awk '/Active/{print $2}')
 echo "Current status of isc-dhcp-server.service: $stat_old"
 
@@ -45,8 +51,10 @@ else
 fi    
     
 # Добавлен код для проверки "Initialization Sequence Completed"
- if grep -q "Initialization Sequence Completed" "$0"
- then
- echo "tun is work! Exiting the script."
- exit 0
- fi
+if grep -q "Initialization Sequence Completed" "$0"
+then
+  echo -e "${GREEN}Found the desired string! Exiting the script.${NC}"
+  exit 0
+else
+  echo -e "${RED}The desired string is not found.${NC}"
+fi
