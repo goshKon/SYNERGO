@@ -6,6 +6,7 @@ ro="Orange"
 else
 ro="Raspberry"
 fi
+
 date_rasp=$(date +"%Y-%m-%d") # дата rasp
 fmount.sh
 echo "The current date $ro: ${date_rasp}" 
@@ -21,6 +22,7 @@ then
 echo "Device ADB no found"
 else
 echo "Device connected"
+
 # проверка на пинг ADB
 if ! adb shell ping -c 5 8.8.8.8 >/dev/null 2>&1
 then
@@ -58,8 +60,7 @@ if /sbin/ifconfig tun0 | grep -q "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-0
 then
 echo "Initialization Sequence Completed"
 elif
-
-[ "$ro" = "Orange" ] #orange=5, rasp=3.
+[ "$ro" = "Orange" ]
 then  
 	echo "Starting orange script"
  	sleep 5
