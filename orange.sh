@@ -1,6 +1,5 @@
 #!/bin/sh
 stat_new=$(systemctl status dnsmasq.service | awk '/Active/{print $2}')
-
 echo "Current status of dnsmasq.service: $stat_new"
 
 if grep -E "^(/sbin/ifconfig eth0 0.0.0.0 0.0.0.0|dhclient)" /etc/rc.local
@@ -25,10 +24,12 @@ then
         /usr/sbin/openvpn --config /etc/openvpn/client.ovpn & >/dev/null 2>&1
         echo "Restarting VPN"		
  fi   
+ 
 if /sbin/ifconfig tun0 | grep -q "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00"
 then
     echo "Initialization Sequence Completed"
 fi
+
 # Добавлен код для проверки "Initialization Sequence Completed"
 if grep -q "Initialization Sequence Completed" "$0"
  then
