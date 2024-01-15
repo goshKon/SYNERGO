@@ -1,4 +1,10 @@
 #!/bin/bash
+# Зеленый цвет
+LIGHT_CYAN="\033[1;36m"
+# Красный цвет
+RED='\033[0;31m'
+# Сброс цвета
+NC='\033[0m'
 ro=$(cat /proc/cpuinfo | grep "model name" | awk '{print $7}' | head -n 1) 
 if [ "$ro" = "5" ]
 then
@@ -71,10 +77,13 @@ else
  	sleep 5
 	sh /etc/scripts/rasp.sh
 fi	
- # Добавлен код для проверки "Initialization Sequence Completed"
- if grep -q "Initialization Sequence Completed" "$0"
- then
- echo "tun is work! Exiting the script."
- exit 0
- fi
+# Добавлен код для проверки "Initialization Sequence Completed"
+if grep -q "Initialization Sequence Completed" "$0"
+then
+  echo "${LIGHT_CYAN}Tunnel is work! Exiting the script.${NC}"
+  exit 0
+else
+  echo "${RED}Tunnel is NOT work! Exiting the script.${NC}"
+  exit 0
+fi
 
