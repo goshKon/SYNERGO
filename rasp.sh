@@ -57,4 +57,5 @@ then
   exit 0
 else
   echo "${RED}Tunnel is NOT work! Exiting the script.${NC}"
+  exit 0
 fi
