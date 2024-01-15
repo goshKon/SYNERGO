@@ -27,9 +27,7 @@ then
 echo "Error: Failed to restore ping." # пинг ADB не идет 
 exit 1
 		fi
-#if [ "$pinging" >/dev/null 2>&1 ] # проверка на пинг ADB
-#echo "$pinging"
-#	then
+
 		if [ "$date_rasp" = "$adb_result_formatted" ] # проверка на корректность даты из adb в rasp
 then
 echo "Date is successfuly, the script is running."
@@ -53,21 +51,15 @@ date -s "${formatted_date}"
 
 # Вывести результат
 echo "Date and time are set to $ro: ${formatted_date}"
-#else
-#echo "Ошибка: Не удалось выполнить пинг." # пинг ADB не идет
-#break
-#fi
-#exit 0
+
 		fi
 	fi
 if /sbin/ifconfig tun0 | grep -q "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00"
 then
 echo "Initialization Sequence Completed"
 elif
-#rasp_or_orange=$(cat /proc/cpuinfo | grep "model name" | awk '{print $7}' | head -n 1)	#orange=5, rasp=3.
-#	if [ "$rasp_or_orange" = "5" ]
-#[ "$ro" -eq "5" ]
-[ "$ro" = "Orange" ]
+
+[ "$ro" = "Orange" ] #orange=5, rasp=3.
 then  
 	echo "Starting orange script"
  	sleep 5
@@ -84,15 +76,4 @@ fi
  echo "tun is work! Exiting the script."
  exit 0
  fi
-# Добавлен код для проверки "Initialization Sequence Completed"
-#while read -r line
- #do
-  #  echo "$line"
-   # if [ $line == *"Initialization Sequence Completed"* ]
-    #then
-     #   echo "Initialization Sequence Completed detected. Exiting the script."
-	#	sleep 2
-  #fi
- #		 done
-    
-#exit 0
+
