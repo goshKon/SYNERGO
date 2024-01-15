@@ -1,6 +1,6 @@
 #!/bin/sh
 # Зеленый цвет
-GREEN='\033[1;32m'
+LIGHT_CYAN="\033[1;36m"
 # Красный цвет
 RED='\033[0;31m'
 # Сброс цвета
@@ -53,7 +53,7 @@ fi
 # Добавлен код для проверки "Initialization Sequence Completed"
 if grep -q "Initialization Sequence Completed" "$0"
 then
-  echo "${GREEN}Tunnel is work! Exiting the script.${NC}"
+  echo "${LIGHT_CYAN}Tunnel is work! Exiting the script.${NC}"
   exit 0
 else
   echo "${RED}Tunnel is NOT work! Exiting the script.${NC}"
