@@ -1,7 +1,4 @@
 #!/bin/sh
-#dhcl=$(grep -x "/sbin/ifconfig eth0 0.0.0.0 0.0.0.0 | dhclient" /etc/rc.local)
-#dhcl=$(grep "/sbin/ifconfig eth0 0.0.0.0 0.0.0.0 | dhclient" /etc/rc.local)
-#dhcl_com="# /sbin/ifconfig eth0 0.0.0.0 0.0.0.0 | dhclient &"
 stat_old=$(systemctl status isc-dhcp-server.service | awk '/Active/{print $2}')
 
 echo "Current status of isc-dhcp-server.service: $stat_old"
@@ -26,7 +23,6 @@ then
     echo "Initialization Sequence Completed"
     elif 
     grep -E "^(/sbin/ifconfig eth0 0.0.0.0 0.0.0.0|dhclient)" /etc/rc.local
-	#[ "$dhcl" != "$dhcl_com" ] 
 	then
  /sbin/ifconfig eth0 0.0.0.0 0.0.0.0 | dhclient & >/dev/null 2>&1
         sleep 10
