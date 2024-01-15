@@ -8,6 +8,7 @@ if [ "$stat_old" = "active" -o "$stat_old" = "inactive" ]
 		if [ $? -eq 0 ] 
 		then
             echo "Ping successful"
+	    sleep 4
         else
             echo "Rebooting VPN AFTER NO PING"
             killall -15 openvpn
