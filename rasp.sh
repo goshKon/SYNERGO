@@ -1,8 +1,6 @@
 #!/bin/sh
 stat_old=$(systemctl status isc-dhcp-server.service | awk '/Active/{print $2}')
-
 echo "Current status of isc-dhcp-server.service: $stat_old"
-
 
 if [ "$stat_old" = "active" ]
 	then
