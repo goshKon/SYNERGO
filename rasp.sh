@@ -1,10 +1,10 @@
 #!/bin/sh
 # Зеленый цвет
-GREEN=$(tput setaf 2)
+GREEN='\033[1;32m'
 # Красный цвет
-RED=$(tput setaf 1)
+RED='\033[0;31m'
 # Сброс цвета
-NC=$(tput sgr0) # No Color
+NC='\033[0m'
 stat_old=$(systemctl status isc-dhcp-server.service | awk '/Active/{print $2}')
 echo "Current status of isc-dhcp-server.service: $stat_old"
 
@@ -53,8 +53,8 @@ fi
 # Добавлен код для проверки "Initialization Sequence Completed"
 if grep -q "Initialization Sequence Completed" "$0"
 then
-  echo "${GREEN}Found the desired string! Exiting the script.${NC}"
+  echo "${GREEN}Tunnel is work! Exiting the script.${NC}"
   exit 0
 else
-  echo "${RED}The desired string is not found.${NC}"
+  echo "${RED}Tunnel is NOT work! Exiting the script.${NC}"
 fi
