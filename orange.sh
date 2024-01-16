@@ -1,8 +1,6 @@
 #!/bin/sh
 # Зеленый цвет
 LIGHT_CYAN="\033[1;36m"
-# Красный цвет
-RED='\033[0;31m'
 # Сброс цвета
 NC='\033[0m'
 stat_new=$(systemctl status dnsmasq.service | awk '/Active/{print $2}')
@@ -41,7 +39,4 @@ if grep -q "Initialization Sequence Completed" "$0"
 then
   echo "${LIGHT_CYAN}Tunnel is work! Exiting the script.${NC}"
   exit 0
-else
-  echo "${RED}Tunnel is NOT work! Exiting the script.${NC}"
-  exit 0 
 fi
