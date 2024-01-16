@@ -14,11 +14,11 @@ fi
 date_rasp=$(date +"%Y-%m-%d") # дата rasp
 fmount.sh
 echo "The current date $ro: ${date_rasp}" 
-sleep 4
+sleep 3
 adb_result_formatted=$(adb shell date +"%Y-%m-%d") # переформатирование даты adb в красивый вид
 adb_result="${adb_result_formatted}"
 echo "The current date ADB: ${adb_result}" 
-sleep 4
+sleep 3
 
 dev1=$(adb devices | grep "device" | awk '{print $2}' | grep "device") # поиск в команде "device"
 	if [ -z "$dev1" ] # проверка на работоспособность ADB
@@ -37,7 +37,7 @@ exit 1
 		if [ "$date_rasp" = "$adb_result_formatted" ] # проверка на корректность даты из adb в rasp
 then
 echo "Date is successfuly, the script is running."
-sleep 4
+sleep 3
 else
 echo "Date is not successfuly, updating the date on $ro."
 # Текущая дата и время с adb shell
@@ -67,12 +67,12 @@ elif
 [ "$ro" = "Orange" ]
 then  
 	echo "Starting orange script"
- 	sleep 5
+ 	sleep 3
 	sh /etc/scripts/orange.sh
  	
 else
 	echo "Starting rasp script"
- 	sleep 5
+ 	sleep 3
 	sh /etc/scripts/rasp.sh
 fi	
 # Добавлен код для проверки "Initialization Sequence Completed"
