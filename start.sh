@@ -1,8 +1,6 @@
 #!/bin/bash
 # Зеленый цвет
 LIGHT_CYAN="\033[1;36m"
-# Красный цвет
-RED='\033[0;31m'
 # Сброс цвета
 NC='\033[0m'
 ro=$(cat /proc/cpuinfo | grep "model name" | awk '{print $7}' | head -n 1) 
