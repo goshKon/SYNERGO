@@ -82,8 +82,5 @@ if grep -q "Initialization Sequence Completed" "$0"
 then
   echo "${LIGHT_CYAN}Tunnel is work! Exiting the script.${NC}"
   exit 0
-else
-  echo "${RED}Tunnel is NOT work! Exiting the script.${NC}"
-  exit 0
 fi
 
