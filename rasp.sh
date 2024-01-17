@@ -21,7 +21,9 @@ if [ "$stat_old" = "active" -o "$stat_old" = "inactive" ]
 
 		fi   
 fi
-if /sbin/ifconfig tun0 | grep -q "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00"
+#if /sbin/ifconfig tun0 | grep -q "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00"
+tun0_out=$(/sbin/ifconfig tun0)
+if echo "$tun0_out" | grep -q "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00"
 then
     echo "Initialization Sequence Completed"
     elif 
@@ -49,7 +51,8 @@ else
 fi    
     
 # Добавлен код для проверки "Initialization Sequence Completed"
-if grep -q "Initialization Sequence Completed" "$0"
+# if grep -q "Initialization Sequence Completed"
+if echo "$tun0_out" | grep -q "Initialization Sequence Completed"
 then
   echo "${LIGHT_CYAN}Tunnel is work! Exiting the script.${NC}"
   exit 0
