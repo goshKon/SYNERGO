@@ -28,7 +28,7 @@ attempt=0
 
 while [ $attempt -lt $max_attempts -a $success -eq 0 ]
 do
-stat_new=$(systemctl status dnsmasq.service | awk '/Active/{print \$2}')
+stat_new=$(systemctl status dnsmasq.service | awk '/Active/{print $2}')
 echo "Current status of dnsmasq.service: $stat_new"
 
 tun0_out=$(/sbin/ifconfig tun0)
