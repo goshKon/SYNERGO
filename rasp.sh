@@ -14,7 +14,7 @@ echo "Current status of isc-dhcp-server.service: $stat_old"
 
 max_attempts=3
 attempt=0
-while [$attempt -lt $max_attempts]
+while [ $attempt -lt $max_attempts ]
 do
 if [ "$stat_old" = "active" -o "$stat_old" = "inactive" ]
 	then
