@@ -18,8 +18,8 @@ while [$attempt -lt $max_attempts]
 do
 if [ "$stat_old" = "active" -o "$stat_old" = "inactive" ]
 	then
-           if ping -c 5 172.81.0.1 >/dev/null 2>&1
-		#if [ $? -eq 0 ] 
+           ping -c 5 172.81.0.1 >/dev/null 2>&1
+		if [ $? -eq 0 ] 
 		then
             echo "Ping successful"
 	    sleep 3
