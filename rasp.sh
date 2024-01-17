@@ -48,6 +48,7 @@ do
     if echo "$tun0_out" | grep -q "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00"
     then
         echo "${LIGHT_CYAN}Tunnel is work! Exiting the script.${NC}"
+	break
     elif 
 	grep -E "^(/sbin/ifconfig eth0 0.0.0.0 0.0.0.0|dhclient)" /etc/rc.local
     then
