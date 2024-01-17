@@ -28,14 +28,16 @@ then
         /usr/sbin/openvpn --config /etc/openvpn/client.ovpn & >/dev/null 2>&1
         echo "Restarting VPN"		
  fi   
- 
-if /sbin/ifconfig tun0 | grep -q "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00"
+ tun0_out=$(/sbin/ifconfig tun0)
+if echo "$tun0_out" | grep -q "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00"
+#if /sbin/ifconfig tun0 | grep -q "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00"
 then
     echo "Initialization Sequence Completed"
 fi
 
 # Добавлен код для проверки "Initialization Sequence Completed"
-if grep -q "Initialization Sequence Completed" "$0"
+#if grep -q "Initialization Sequence Completed" "$0"
+if echo "$tun0_out" | grep -q "Initialization Sequence Completed"
 then
   echo "${LIGHT_CYAN}Tunnel is work! Exiting the script.${NC}"
   exit 0
