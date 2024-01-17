@@ -7,7 +7,7 @@ NC='\033[0m'
 fmount.sh
 success=0
 rest_VPN() {
-    pkill openvpn
+    killall -15 openvpn
     sleep 15
     /usr/sbin/openvpn --config /etc/openvpn/client.ovpn 2>&1 & sleep 15 | while read line
     do
@@ -15,7 +15,7 @@ rest_VPN() {
         if echo $line | grep -q "Initialization Sequence Completed"
         then
             echo "${LIGHT_CYAN}Tunnel is work! Exiting the script.${NC}"
-            pkill openvpn
+          killall -15 openvpn
             exit 0
         fi
     done &
