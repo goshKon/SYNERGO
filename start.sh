@@ -32,7 +32,7 @@ if ! adb shell ping -c 5 8.8.8.8 >/dev/null 2>&1
 then
 echo "Error: Failed to restore ping." # пинг ADB не идет 
 exit 1
-		fi
+	fi
 
 		if [ "$date_rasp" = "$adb_result_formatted" ] # проверка на корректность даты из adb в rasp
 then
@@ -60,9 +60,12 @@ echo "Date and time are set to $ro: ${formatted_date}"
 
 		fi
 	fi
-if /sbin/ifconfig tun0 | grep -q "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00"
+#if /sbin/ifconfig tun0 | grep -q "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00"
+tun0_out=$(/sbin/ifconfig tun0)
+if echo "$tun0_out" | grep -q "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00"
 then
-echo "Initialization Sequence Completed"
+echo "${LIGHT_CYAN}Tunnel is work! Exiting the script.${NC}"
+exit 0
 elif
 [ "$ro" = "Orange" ]
 then  
@@ -75,10 +78,4 @@ else
  	sleep 3
 	sh /etc/scripts/rasp.sh
 fi	
-# Добавлен код для проверки "Initialization Sequence Completed"
-if grep -q "Initialization Sequence Completed" "$0"
-then
-  echo "${LIGHT_CYAN}Tunnel is work! Exiting the script.${NC}"
-  exit 0
-fi
 
