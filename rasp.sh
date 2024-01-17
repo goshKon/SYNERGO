@@ -34,7 +34,7 @@ fi
 tun0_out=$(/sbin/ifconfig tun0)
 if echo "$tun0_out" | grep -q "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00"
 then
- echo "Initialization Sequence Completed"
+ #echo "Initialization Sequence Completed"
  echo "${LIGHT_CYAN}Tunnel is work! Exiting the script.${NC}"
    exit 0
     elif 
