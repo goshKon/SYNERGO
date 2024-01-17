@@ -31,14 +31,15 @@ do
 stat_new=$(systemctl status dnsmasq.service | awk '/Active/{print $2}')
 echo "Current status of dnsmasq.service: $stat_new"
 
-tun0_out=$(/sbin/ifconfig tun0)
-if echo "$tun0_out" | grep -q "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00"
-then
-     echo "${LIGHT_CYAN}Tunnel is work! Exiting the script.${NC}"
-     elif
-grep -E "^(/sbin/ifconfig eth0 0.0.0.0 0.0.0.0|dhclient)" /etc/rc.local
-then
- 	/sbin/ifconfig eth0 0.0.0.0 0.0.0.0 | dhclient & >/dev/null 2>&1
+ tun0_out=$(/sbin/ifconfig tun0)
+    if echo "$tun0_out" | grep -q "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00"
+    then
+        echo "${LIGHT_CYAN}Tunnel is work! Exiting the script.${NC}"
+	break
+    elif 
+	grep -E "^(/sbin/ifconfig eth0 0.0.0.0 0.0.0.0|dhclient)" /etc/rc.local
+    then
+ 	/sbin/ifconfig eth0 0.0.0.0 0.0.0.0 && dhclient & >/dev/null 2>&1
 	sleep 5
 	rest_VPN
 	echo "Restarting DHCP"	
