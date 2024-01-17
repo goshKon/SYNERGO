@@ -40,6 +40,7 @@ echo "Date is successfuly, the script is running."
 sleep 3
 else
 echo "Date is not successfuly, updating the date on $ro."
+sleep 3
 # Текущая дата и время с adb shell
 adb_result="${adb_result_formatted} $(date +"%T")"
 #Извлечь год, месяц, день, часы, минуты и секунды
@@ -57,7 +58,7 @@ date -s "${formatted_date}"
 
 # Вывести результат
 echo "Date and time are set to $ro: ${formatted_date}"
-
+sleep 3
 		fi
 	fi
 #if /sbin/ifconfig tun0 | grep -q "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00"
