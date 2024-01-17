@@ -28,8 +28,8 @@ attempt=0
 
 while [ $attempt -lt $max_attempts -a $success -eq 0 ]
 do
-    stat_old=$(systemctl status isc-dhcp-server.service | awk '/Active/{print \$2}')
-    echo "Current status of isc-dhcp-server.service: $stat_old"
+stat_old=$(systemctl status isc-dhcp-server.service | awk '/Active/{print $2}')
+echo "Current status of isc-dhcp-server.service: $stat_old"
 
     if [ "$stat_old" = "active" -o "$stat_old" = "inactive" ]
     then
