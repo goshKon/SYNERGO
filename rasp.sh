@@ -13,6 +13,7 @@ rest_VPN() {
     do
         echo $line
         if echo $line | grep -q "Initialization Sequence Completed"
+	#if echo $line | grep -Eq "Initialization Sequence Completed|Tunnel is work! Exiting the script." //если имеется зацикливание с openvpn
         then
             echo "${LIGHT_CYAN}Tunnel is work! Exiting the script.${NC}"
            killall -15 openvpn
