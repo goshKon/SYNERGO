@@ -76,6 +76,7 @@ then
     else
         echo "Netmask not found, restarting dhcpcd"
         systemctl restart dhcpcd
+	sleep 3
     fi
 else
     echo "It's Static, stop process."
