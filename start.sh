@@ -74,7 +74,7 @@ then
         echo "${LIGHT_CYAN}Netmask found, Exiting...${NC}"
         exit 0
     else
-        echo "Netmask not found, restarting dhcpcd"
+        echo "Netmask not found, Restarting dhcpcd"
         systemctl restart dhcpcd
 	sleep 3
     fi
