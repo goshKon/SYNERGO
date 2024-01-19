@@ -69,13 +69,18 @@ echo "${LIGHT_CYAN}Tunnel is work! Exiting the script.${NC}"
 if grep -E "^(/sbin/ifconfig eth0 0.0.0.0 0.0.0.0|dhclient)" /etc/rc.local
 then
     # Проверяем наличие строки "netmask" в выводе команды ifconfig для интерфейса eth0
-    if ifconfig eth0 | grep -q "netmask"; then
-        echo "netmask found, exiting"
+    if ifconfig eth0 | grep -q "netmask"
+    then
+        echo "${LIGHT_CYAN}Netmask found, Exiting...${NC}"
         exit 0
     else
-        echo "netmask not found, restarting dhcpcd"
+        echo "Netmask not found, restarting dhcpcd"
         systemctl restart dhcpcd
     fi
+else
+    echo "It's Static, stop process."
+    exit 0
+fi
 fi
 exit 0
 elif
