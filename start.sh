@@ -72,7 +72,7 @@ then
     if ifconfig eth0 | grep -q "netmask"
     then
         echo "${LIGHT_CYAN}Netmask found, Exiting...${NC}"
-        exit 0
+       # exit 0
     else
         echo "Netmask not found, Restarting dhcpcd"
         systemctl restart dhcpcd
@@ -83,7 +83,7 @@ else
     exit 0
 fi
 fi
-exit 0
+#exit 0
 elif
 [ "$ro" = "Orange" ]
 then  
