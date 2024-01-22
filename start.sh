@@ -66,15 +66,15 @@ tun0_out=$(/sbin/ifconfig tun0)
 if echo "$tun0_out" | grep -q "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00"
 then
 echo "${LIGHT_CYAN}Tunnel is work! Exiting the script.${NC}"
-if grep -E "^(/sbin/ifconfig eth0 0.0.0.0 0.0.0.0|dhclient)" /etc/rc.local
+if grep -E "^(/sbin/ifconfig eth0 0.0.0.0 0.0.0.0|dhclient)" /etc/rc.local >/dev/null 2>&1
 then
     # Проверяем наличие строки "netmask" в выводе команды ifconfig для интерфейса eth0
     if ifconfig eth0 | grep -q "netmask"
     then
-        echo "${LIGHT_CYAN}Netmask found, Exiting...${NC}"
+        echo "${LIGHT_CYAN}IPv4 found, Exiting...${NC}"
        # exit 0
     else
-        echo "Netmask not found, Restarting dhcpcd"
+        echo "IPv4 not found, Restarting dhcpcd"
         systemctl restart dhcpcd
 	sleep 3
     fi
