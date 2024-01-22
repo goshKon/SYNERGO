@@ -7,19 +7,21 @@ NC='\033[0m'
 fmount.sh
 success=0
 rest_VPN() {
-    killall -15 openvpn
-    sleep 15
-    /usr/sbin/openvpn --config /etc/openvpn/client.ovpn 2>&1 & sleep 15 | while read line
+    echo "Killing any existing openvpn processes..."
+    killall -9 openvpn
+    sleep 5
+    echo "Starting openvpn..."
+    /usr/sbin/openvpn --config /etc/openvpn/client.ovpn 2>&1 & sleep 5 | while read line
     do
         echo $line
-        if echo $line | grep -q "Initialization Sequence Completed"
+        if echo $line | grep -Eq "Initialization Sequence Completed|Tunnel is work! Exiting the script."
         then
             echo "${LIGHT_CYAN}Tunnel is work! Exiting the script.${NC}"
-          killall -15 openvpn
+            killall -9 openvpn
+            success=1
             exit 0
         fi
     done &
-
     wait $!
 }
 
@@ -56,14 +58,13 @@ else
         echo "Restarting VPN"		
 fi   
 
-       attempt=$((attempt+1))
-    echo "Attempt $attempt of $max_attempts failed. Retrying..."
-    sleep 10
+        attempt=$((attempt+1))
+    if [ $success -eq 0 ]
+    then
+        echo "Attempt $attempt of $max_attempts failed. Retrying..."
+        sleep 10
+    fi
 done
-if [ $success -eq 0 ]
-then
-break
-else
     echo "Failed to Initialize tunnel after $max_attempts attempts. Exiting script."
     exit 1
 fi
