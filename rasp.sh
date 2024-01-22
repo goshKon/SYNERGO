@@ -12,8 +12,8 @@ rest_VPN() {
     /usr/sbin/openvpn --config /etc/openvpn/client.ovpn 2>&1 & sleep 15 | while read line
     do
         echo $line
-        if echo $line | grep -q "Initialization Sequence Completed"
-	#if echo $line | grep -Eq "Initialization Sequence Completed|Tunnel is work! Exiting the script." //Использовать, если имеется зацикливание с openvpn
+        #if echo $line | grep -q "Initialization Sequence Completed"
+	if echo $line | grep -Eq "Initialization Sequence Completed|Tunnel is work! Exiting the script." #Использовать, если имеется зацикливание с openvpn
         then
             echo "${LIGHT_CYAN}Tunnel is work! Exiting the script.${NC}"
            killall -15 openvpn
