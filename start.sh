@@ -80,9 +80,9 @@ then
     fi
 else
     echo "It's Static, stop process."
-    exit 0
+   # exit 0
 fi
-fi
+#fi
 #exit 0
 elif
 [ "$ro" = "Orange" ]
