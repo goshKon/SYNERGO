@@ -61,7 +61,6 @@ echo "Date and time are set to $ro: ${formatted_date}"
 sleep 3
 		fi
 	fi
-#if /sbin/ifconfig tun0 | grep -q "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00"
 tun0_out=$(/sbin/ifconfig tun0)
 if echo "$tun0_out" | grep -q "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00"
 then
@@ -72,7 +71,6 @@ then
     if ifconfig eth0 | grep -q "netmask"
     then
         echo "${LIGHT_CYAN}IPv4 found, Exiting...${NC}"
-       # exit 0
     else
         echo "IPv4 not found, Restarting dhcpcd"
         systemctl restart dhcpcd
@@ -80,10 +78,7 @@ then
     fi
 else
     echo "It's Static, stop process."
-   # exit 0
 fi
-#fi
-#exit 0
 elif
 [ "$ro" = "Orange" ]
 then  
