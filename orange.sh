@@ -33,6 +33,19 @@ do
 stat_new=$(systemctl status dnsmasq.service | awk '/Active/{print $2}')
 echo "Current status of dnsmasq.service: $stat_new"
 
+if [ "$stat_new" = "active" -o "$stat_new" = "inactive" ]
+    then
+        if ping -c 5 172.81.0.1 >/dev/null 2>&1
+        then
+            echo "Ping successful"
+            sleep 3
+        else
+            echo "Rebooting VPN AFTER NO PING"
+            sleep 3
+            rest_VPN
+        fi
+    fi
+    
  tun0_out=$(/sbin/ifconfig tun0)
     if echo "$tun0_out" | grep -q "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00"
     then
