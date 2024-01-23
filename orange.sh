@@ -58,13 +58,10 @@ else
         echo "Restarting VPN"		
 fi   
 
-        attempt=$((attempt+1))
+   attempt=$((attempt+1))
     if [ $success -eq 0 ]
     then
         echo "Attempt $attempt of $max_attempts failed. Retrying..."
         sleep 10
     fi
 done
-    echo "Failed to Initialize tunnel after $max_attempts attempts. Exiting script."
-    exit 1
-fi
