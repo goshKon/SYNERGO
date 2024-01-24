@@ -88,8 +88,9 @@ then
 else
     echo "${LIGHT_CYAN}IPv4 found, Exiting...${NC}"
 fi
-
-if [ "$ro" = "${ORANGE}Orange${NC}" ]
+fi
+elif
+ [ "$ro" = "${ORANGE}Orange${NC}" ]
 then  
     echo "Starting orange script"
     sleep 3
