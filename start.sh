@@ -8,7 +8,7 @@ NC='\033[0m'
 ro=$(cat /proc/cpuinfo | grep "model name" | awk '{print $7}' | head -n 1) 
 if [ "$ro" = "5" ]
 then
-ro="Orange"
+ro="${ORANGE}Orange${NC}"
 else
 ro="Raspberry"
 fi
