@@ -98,3 +98,4 @@ else
     echo "Starting rasp script"
     sleep 3
     sh /etc/scripts/rasp.sh
+    fi
