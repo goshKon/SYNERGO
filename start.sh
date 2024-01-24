@@ -34,7 +34,7 @@ if ! adb shell ping -c 5 8.8.8.8 >/dev/null 2>&1
 then
 echo "Error: Failed to restore ping." # пинг ADB не идет 
 exit 1
-	fi
+fi
 
 		if [ "$date_rasp" = "$adb_result_formatted" ] # проверка на корректность даты из adb в rasp
 then
