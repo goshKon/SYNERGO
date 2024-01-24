@@ -10,7 +10,7 @@ if [ "$ro" = "5" ]
 then
 ro="${ORANGE}Orange${NC}"
 else
-ro="Raspberry"
+ro="${PINK}Raspberry${NC}"
 fi
 
 date_rasp=$(date +"%Y-%m-%d") # дата rasp
