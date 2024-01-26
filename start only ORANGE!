@@ -1,0 +1,85 @@
+#!/bin/bash
+LIGHT_CYAN="\033[1;36m"
+YELLOW="\033[1;33m"
+PINK="\033[38;5;211m"
+ORANGE="\033[38;5;208m"
+# Сброс цвета
+NC='\033[0m'
+ro=$(cat /proc/cpuinfo | grep "model name" | awk '{print $7}' | head -n 1) 
+if [ "$ro" = "5" ]
+then
+ro="Orange"
+ro="${ORANGE}Orange${NC}"
+else
+ro="Raspberry"
+ro="${PINK}Raspberry${NC}"
+fi
+/usr/local/bin/fmount.sh
+date_rasp=$(date +"%Y-%m-%d") # дата rasp
+echo "The current date $ro: ${ORANGE}${date_rasp}${NC}" 
+sleep 3
+
+adb_result_formatted=$(timedatectl | grep 'RTC time:' | awk '{print $4}')
+echo "The current date ${LIGHT_CYAN}NTP: ${adb_result_formatted}${NC}" 
+sleep 3
+
+	if [ "$date_rasp" = "$adb_result_formatted" ] # проверка на корректность даты из adb в rasp
+then
+echo "${LIGHT_CYAN}Date is successfuly, the script is running.${NC}"
+sleep 3
+else
+echo "${YELLOW}Warning! Date is not successfuly,${NC} ${LIGHT_CYAN}updating the date on $ro:${NC}"
+sleep 3
+# Установить дату на Raspberry Pi
+date -s "${adb_result_formatted}"
+formatted_date=$(date +"%Y-%m-%d %H:%M:%S")
+# Вывести результат
+#echo "Date and time are set to $ro: ${LIGHT_CYAN}${formatted_date}${NC}"
+echo "Date and time are set to $ro: ${LIGHT_CYAN}${adb_result_formatted}${NC}"
+sleep 3
+	fi
+		
+dev1=$(adb devices | grep "device" | awk '{print $2}' | grep "device") # поиск в команде "device"
+		if [ -z "$dev1" ] # проверка на работоспособность ADB
+then
+echo "${YELLOW}Device ADB no found${NC}"
+else
+echo "${LIGHT_CYAN}Device connected${NC}"
+		fi	
+tun0_out=$(/sbin/ifconfig tun0)
+if echo "$tun0_out" | grep -q "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00"
+then
+echo "${LIGHT_CYAN}Tunnel is work! Exiting the script.${NC}"
+if grep -E "^(/sbin/ifconfig eth0 0.0.0.0 0.0.0.0|dhclient)" /etc/rc.local >/dev/null 2>&1
+then
+    # Проверяем наличие строки "netmask" в выводе команды ifconfig для интерфейса eth0
+eth0_info=$(ifconfig eth0 | grep "netmask" | awk '{print $3}')
+
+# Если в выводе нет строки "netmask"...
+if [ -z "$eth0_info" ]
+then
+    echo "${LIGHT_CYAN}IPv4 not found, Restarting...${NC}"
+    if [ "$ro" = 3 ]
+    then
+        echo "${YELLOW}Restarting ${PINK}dhcpcd${NC}"
+        systemctl restart dhcpcd
+    else 
+        dhclient -r eth0 && dhclient eth0
+        echo "${YELLOW}Restarting ${ORANGE}dhclient${NC}"
+        sleep 3
+    fi
+else
+    echo "${LIGHT_CYAN}IPv4 found, Exiting...${NC}"
+fi
+fi
+elif
+ [ "$ro" = "${ORANGE}Orange${NC}" ]
+then  
+    echo "Starting orange script"
+    sleep 3
+    sh /etc/scripts/orange.sh
+else
+    echo "Starting rasp script"
+    sleep 3
+    sh /etc/scripts/rasp.sh
+fi
