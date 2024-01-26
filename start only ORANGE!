@@ -34,7 +34,6 @@ sleep 3
 date -s "${adb_result_formatted}"
 formatted_date=$(date +"%Y-%m-%d %H:%M:%S")
 # Вывести результат
-#echo "Date and time are set to $ro: ${LIGHT_CYAN}${formatted_date}${NC}"
 echo "Date and time are set to $ro: ${LIGHT_CYAN}${adb_result_formatted}${NC}"
 sleep 3
 	fi
