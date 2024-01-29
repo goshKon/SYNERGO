@@ -15,7 +15,7 @@ ro="Raspberry"
 ro="${PINK}Raspberry${NC}"
 fi
 /usr/local/bin/fmount.sh
-/usr/sbin/hwclock
+/usr/sbin/hwclock -w
 sleep 3
 date_rasp=$(date +"%Y-%m-%d") # дата rasp
 echo "The current date $ro: ${ORANGE}${date_rasp}${NC}" 
