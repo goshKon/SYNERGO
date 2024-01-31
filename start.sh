@@ -15,11 +15,7 @@ fi
 
 date_rasp=$(date +"%Y-%m-%d") # дата rasp
 /usr/local/bin/fmount.sh
-sleep 5  
-echo pcf8563 0x51 > /sys/class/i2c-adapter/i2c-0/new_device 
-sleep 5  
-/sbin/hwclock -s  
-/bin/echo "hwlock changed" >/tmp/hwx
+sleep 3
 echo "The current date $ro: ${date_rasp}"
 sleep 3
 adb_result_formatted=$(adb shell date +"%Y-%m-%d") # переформатирование даты adb в красивый вид
