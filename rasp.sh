@@ -4,7 +4,7 @@
 LIGHT_CYAN="\033[1;36m"
 # Сброс цвета
 NC='\033[0m'
-fmount.sh
+/usr/local/bin/fmount.sh
 success=0
 rest_VPN() {
     echo "Killing any existing openvpn processes..."
